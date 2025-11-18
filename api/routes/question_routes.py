@@ -14,7 +14,8 @@ vector_store = VectorStore()
 
 # Load questions database
 with open("data/interview_questions.json", "r", encoding="utf-8") as f:
-    questions_db = json.load(f)
+    questions_data = json.load(f)
+    questions_db = questions_data.get("questions", [])
 
 
 @router.get("/questions", response_model=QuestionListResponse)
@@ -37,7 +38,7 @@ async def get_questions(
                     question=r.get("question", ""),
                     category=r.get("category", "General"),
                     difficulty=r.get("difficulty", "Medium"),
-                    hints=r.get("answer_hints", [])
+                    hints=[r.get("answer_hints", "")] if isinstance(r.get("answer_hints"), str) else r.get("answer_hints", [])
                 )
                 for i, r in enumerate(results)
             ]
@@ -60,7 +61,7 @@ async def get_questions(
                     question=q.get("question", ""),
                     category=q.get("category", "General"),
                     difficulty=q.get("difficulty", "Medium"),
-                    hints=q.get("answer_hints", [])
+                    hints=[q.get("answer_hints", "")] if isinstance(q.get("answer_hints"), str) else q.get("answer_hints", [])
                 )
                 for i, q in enumerate(filtered)
             ]
@@ -83,12 +84,13 @@ async def get_question_by_id(question_id: str):
         question_idx = int(question_id)
         if 0 <= question_idx < len(questions_db):
             q = questions_db[question_idx]
+            answer_hints = q.get("answer_hints", "")
             return Question(
                 id=question_id,
                 question=q.get("question", ""),
                 category=q.get("category", "General"),
                 difficulty=q.get("difficulty", "Medium"),
-                hints=q.get("answer_hints", [])
+                hints=[answer_hints] if isinstance(answer_hints, str) else answer_hints
             )
         else:
             raise HTTPException(status_code=404, detail="Question not found")
@@ -105,7 +107,8 @@ async def get_categories():
     Get list of all question categories.
     """
     try:
-        categories = list(set(q.get("category", "General") for q in questions_db))
+        # Get unique categories from questions
+        categories = list(set(q.get("category", "General") for q in questions_db if isinstance(q, dict)))
         return {"categories": sorted(categories)}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Failed to retrieve categories: {str(e)}")

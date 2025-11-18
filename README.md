@@ -103,20 +103,15 @@ Upload or paste a job description, and the AI will extract:
 
 **1. Clone the repository:**
 ```bash
-git clone https://github.com/yourusername/ai-interview-assistant.git
+git clone https://github.com/jimthereal/ai-interview-assistant.git
 cd ai-interview-assistant
 ```
 
 **2. Backend Setup:**
 ```bash
-# Create virtual environment
-python -m venv venv
-
-# Activate environment
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
+# Create conda environment (RECOMMENDED)
+conda create -n ai-interview-assistant python=3.10
+conda activate ai-interview-assistant
 
 # Install dependencies
 pip install -r requirements.txt
@@ -126,40 +121,50 @@ copy .env.example .env
 # Edit .env and add your Groq API key
 ```
 
-**3. Initialize Database:**
-```bash
-python setup_database.py
-```
-
-**4. Frontend Setup:**
+**3. Frontend Setup:**
 ```bash
 cd frontend
 npm install
-```
-
-**5. Verify Installation:**
-```bash
-# From root directory
-python test_setup.py
+cd ..
 ```
 
 ### Running the Application
 
-**Start Backend (Terminal 1):**
-```bash
-# From root directory
-uvicorn api.main:app --reload
-```
-Backend runs at `http://localhost:8000`
+**Quick Start (RECOMMENDED):**
 
-**Start Frontend (Terminal 2):**
+Open TWO terminals:
+
+**Terminal 1 - Backend:**
+```bash
+.\start_backend.bat
+```
+
+**Terminal 2 - Frontend:**
+```bash
+.\start_frontend.bat
+```
+
+**Manual Start (Alternative):**
+
+**Terminal 1 - Backend:**
+```bash
+conda activate ai-interview-assistant
+python -m uvicorn api.main:app --reload
+```
+
+**Terminal 2 - Frontend:**
 ```bash
 cd frontend
 npm run dev
 ```
-Frontend runs at `http://localhost:5173`
 
-Open your browser to `http://localhost:5173`
+### Access the Application
+
+- **Frontend UI:** http://localhost:5173
+- **API Swagger Docs:** http://localhost:8000/docs  
+- **API ReDoc:** http://localhost:8000/redoc
+
+**Important:** Both backend AND frontend must be running!
 
 ---
 

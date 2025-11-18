@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { getQuestions, getCategories, generateAnswer, evaluateAnswer } from '../api/client';
-import { useAppStore } from '../store';
 import Loading from '../components/Loading';
 import ScoreRing from '../components/ScoreRing';
 import type { Question, EvaluationResponse } from '../types';

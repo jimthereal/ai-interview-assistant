@@ -274,3 +274,17 @@ Be specific and extract actual skills/technologies mentioned."""
             categories.append("General Software Engineering")
         
         return list(set(categories))
+    
+    def explain_term(self, term: str, context: str = None) -> str:
+        """
+        Explain a technical term in simple language
+        
+        Args:
+            term: The technical term to explain
+            context: Optional context for more specific explanation
+            
+        Returns:
+            String explanation of the term
+        """
+        # Use the LLMService's explain_term method
+        return self.llm_service.explain_term(term, context)

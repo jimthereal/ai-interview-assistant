@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { analyzeJobDescription } from '../api/client';
 import { useAppStore } from '../store';
 import Loading from '../components/Loading';
@@ -9,7 +9,14 @@ export default function JobAnalysis() {
   const [analysis, setAnalysis] = useState<JobDescriptionResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const { setJobAnalysis } = useAppStore();
+  const { currentJobAnalysis, setJobAnalysis } = useAppStore();
+
+  // Load persisted analysis on mount
+  useEffect(() => {
+    if (currentJobAnalysis && !analysis) {
+      setAnalysis(currentJobAnalysis);
+    }
+  }, [currentJobAnalysis, analysis]);
 
   const handleAnalyze = async () => {
     if (!jobDescription.trim() || jobDescription.length < 50) {

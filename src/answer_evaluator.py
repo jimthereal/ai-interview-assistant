@@ -6,12 +6,91 @@ from typing import Dict, List
 from src.llm_service import LLMService
 
 
+class ProgressTracker:
+    """Tracks user progress across sessions"""
+    
+    def __init__(self):
+        """Initialize progress tracker"""
+        self.sessions = []
+        self.history = []  # Store individual question attempts
+    
+    def add_session_data(self, session_data: Dict):
+        """Add data from a practice session"""
+        self.sessions.append(session_data)
+    
+    def add_practice_entry(self, question_data: Dict):
+        """Add individual practice entry"""
+        self.history.append(question_data)
+    
+    def reset_statistics(self):
+        """Reset all progress data"""
+        self.sessions = []
+        self.history = []
+    
+    def get_statistics(self) -> Dict:
+        """Calculate overall statistics"""
+        if not self.history and not self.sessions:
+            return {
+                "total_questions": 0,
+                "average_score": 0.0,
+                "by_category": {},
+                "history": [],
+                "improvement_trend": "N/A"
+            }
+        
+        total_questions = len(self.history)
+        all_scores = [h.get("score", 0) for h in self.history if "score" in h]
+        
+        avg_score = sum(all_scores) / len(all_scores) if all_scores else 0.0
+        
+        # Category breakdown
+        by_category = {}
+        for entry in self.history:
+            category = entry.get("category", "General")
+            if category not in by_category:
+                by_category[category] = {"count": 0, "total_score": 0, "scores": []}
+            
+            by_category[category]["count"] += 1
+            if "score" in entry:
+                by_category[category]["total_score"] += entry["score"]
+                by_category[category]["scores"].append(entry["score"])
+        
+        # Calculate averages per category
+        for category, data in by_category.items():
+            if data["count"] > 0:
+                data["average_score"] = data["total_score"] / data["count"]
+        
+        # Calculate improvement trend
+        trend = "N/A"
+        if len(all_scores) >= 4:
+            first_half = all_scores[:len(all_scores)//2]
+            second_half = all_scores[len(all_scores)//2:]
+            first_avg = sum(first_half) / len(first_half)
+            second_avg = sum(second_half) / len(second_half)
+            
+            if second_avg > first_avg + 0.5:
+                trend = "Improving ↗"
+            elif second_avg < first_avg - 0.5:
+                trend = "Declining ↘"
+            else:
+                trend = "Stable →"
+        
+        return {
+            "total_questions": total_questions,
+            "average_score": round(avg_score, 1),
+            "by_category": by_category,
+            "history": self.history,
+            "improvement_trend": trend
+        }
+
+
 class AnswerEvaluator:
     """Evaluates and scores interview answers"""
     
     def __init__(self):
         """Initialize the evaluator with LLM service"""
         self.llm_service = LLMService()
+        self.progress_tracker = ProgressTracker()
     
     def evaluate_comprehensive(
         self,
@@ -192,126 +271,11 @@ class AnswerEvaluator:
             "better_answer": "Answer 1" if score1 > score2 else "Answer 2" if score2 > score1 else "Tie",
             "score_difference": abs(score1 - score2)
         }
-
-
-class ProgressTracker:
-    """Tracks user progress across sessions"""
-    
-    def __init__(self):
-        """Initialize progress tracker"""
-        self.sessions = []
-    
-    def add_session_data(self, session_data: Dict):
-        """Add data from a practice session"""
-        self.sessions.append(session_data)
     
     def get_statistics(self) -> Dict:
-        """Calculate overall statistics"""
-        if not self.sessions:
-            return {
-                "total_questions": 0,
-                "average_score": 0,
-                "categories_practiced": [],
-                "improvement_trend": "N/A"
-            }
-        
-        total_questions = sum(len(s.get("questions", [])) for s in self.sessions)
-        all_scores = []
-        categories = set()
-        
-        for session in self.sessions:
-            for q_data in session.get("questions", []):
-                if "score" in q_data:
-                    all_scores.append(q_data["score"])
-                if "category" in q_data:
-                    categories.add(q_data["category"])
-        
-        avg_score = sum(all_scores) / len(all_scores) if all_scores else 0
-        
-        # Calculate improvement trend (compare first half vs second half)
-        trend = "N/A"
-        if len(all_scores) >= 4:
-            first_half_avg = sum(all_scores[:len(all_scores)//2]) / (len(all_scores)//2)
-            second_half_avg = sum(all_scores[len(all_scores)//2:]) / (len(all_scores) - len(all_scores)//2)
-            
-            if second_half_avg > first_half_avg + 0.5:
-                trend = "Improving ↗"
-            elif second_half_avg < first_half_avg - 0.5:
-                trend = "Declining ↘"
-            else:
-                trend = "Stable →"
-        
-        return {
-            "total_questions": total_questions,
-            "average_score": round(avg_score, 1),
-            "categories_practiced": list(categories),
-            "improvement_trend": trend,
-            "total_sessions": len(self.sessions),
-            "scores_history": all_scores
-        }
+        """Get progress statistics from tracker"""
+        return self.progress_tracker.get_statistics()
     
-    def get_category_breakdown(self) -> Dict[str, Dict]:
-        """Get statistics breakdown by category"""
-        category_data = {}
-        
-        for session in self.sessions:
-            for q_data in session.get("questions", []):
-                category = q_data.get("category", "Unknown")
-                score = q_data.get("score", 0)
-                
-                if category not in category_data:
-                    category_data[category] = {
-                        "count": 0,
-                        "total_score": 0,
-                        "scores": []
-                    }
-                
-                category_data[category]["count"] += 1
-                category_data[category]["total_score"] += score
-                category_data[category]["scores"].append(score)
-        
-        # Calculate averages
-        for category, data in category_data.items():
-            data["average_score"] = round(data["total_score"] / data["count"], 1)
-        
-        return category_data
-    
-    def get_recommendations(self) -> List[str]:
-        """Get personalized recommendations based on progress"""
-        recommendations = []
-        
-        stats = self.get_statistics()
-        category_breakdown = self.get_category_breakdown()
-        
-        if stats["total_questions"] == 0:
-            recommendations.append("Start practicing! Upload a job description to get personalized questions.")
-            return recommendations
-        
-        # Find weak categories
-        weak_categories = []
-        for category, data in category_breakdown.items():
-            if data["average_score"] < 6:
-                weak_categories.append(category)
-        
-        if weak_categories:
-            recommendations.append(
-                f"Focus on improving: {', '.join(weak_categories[:3])}"
-            )
-        
-        # Check overall performance
-        if stats["average_score"] < 6:
-            recommendations.append(
-                "Practice more! Try explaining concepts out loud before writing."
-            )
-        elif stats["average_score"] > 8:
-            recommendations.append(
-                "Great job! Try tackling harder questions or new categories."
-            )
-        
-        # Session frequency
-        if len(self.sessions) < 3:
-            recommendations.append(
-                "Consistency is key! Try to practice regularly for best results."
-            )
-        
-        return recommendations
+    def reset_statistics(self):
+        """Reset all progress statistics"""
+        self.progress_tracker.reset_statistics()
