@@ -1,0 +1,28 @@
+# Core Dependencies
+streamlit==1.29.0
+python-dotenv==1.0.0
+
+# LLM Providers (choose one or install all)
+groq>=0.4.0  # Free API - RECOMMENDED
+# openai==1.6.1  # Optional - if you have API key
+# anthropic==0.8.1  # Optional - if you have API key
+
+# Vector Database and Embeddings
+chromadb==0.4.22
+sentence-transformers>=2.3.0  # Updated for compatibility
+
+# Data Processing
+pandas==2.1.4
+numpy>=1.26.2  # Allow newer versions
+
+# Web Scraping (optional for company research)
+beautifulsoup4==4.12.2
+requests==2.31.0
+
+# PDF Generation
+fpdf2==2.7.7
+reportlab==4.0.9
+
+# Utilities
+pydantic==2.5.3
+tiktoken==0.5.2

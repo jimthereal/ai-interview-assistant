@@ -1,0 +1,603 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "description": "Comprehensive interview questions database for AI Interview Assistant",
+    "total_questions": 150,
+    "categories": [
+      "Python",
+      "Data Structures & Algorithms",
+      "System Design",
+      "Machine Learning",
+      "Deep Learning",
+      "NLP",
+      "SQL & Databases",
+      "Cloud Computing",
+      "DevOps",
+      "Behavioral",
+      "General Software Engineering"
+    ]
+  },
+  "questions": [
+    {
+      "question": "Explain the difference between a list and a tuple in Python.",
+      "category": "Python",
+      "difficulty": "Easy",
+      "keywords": ["python", "data structures", "list", "tuple", "immutable"],
+      "answer_hints": "Discuss mutability, performance, use cases, and when to use each."
+    },
+    {
+      "question": "What is a Python decorator and how would you implement one?",
+      "category": "Python",
+      "difficulty": "Medium",
+      "keywords": ["python", "decorator", "function", "wrapper", "metaprogramming"],
+      "answer_hints": "Explain wrapper functions, @syntax, use cases like logging, timing, authentication."
+    },
+    {
+      "question": "How does Python's Global Interpreter Lock (GIL) affect multithreading?",
+      "category": "Python",
+      "difficulty": "Hard",
+      "keywords": ["python", "GIL", "multithreading", "concurrency", "performance"],
+      "answer_hints": "Explain GIL purpose, impact on CPU-bound vs I/O-bound tasks, alternatives like multiprocessing."
+    },
+    {
+      "question": "What are context managers in Python? How do you create a custom one?",
+      "category": "Python",
+      "difficulty": "Medium",
+      "keywords": ["python", "context manager", "with statement", "__enter__", "__exit__"],
+      "answer_hints": "Explain with statement, __enter__ and __exit__ methods, use cases like file handling, database connections."
+    },
+    {
+      "question": "Explain Python's memory management and garbage collection.",
+      "category": "Python",
+      "difficulty": "Hard",
+      "keywords": ["python", "memory management", "garbage collection", "reference counting"],
+      "answer_hints": "Discuss reference counting, generational garbage collection, memory pools, and potential memory leaks."
+    },
+    {
+      "question": "What is the difference between deep copy and shallow copy in Python?",
+      "category": "Python",
+      "difficulty": "Medium",
+      "keywords": ["python", "copy", "deep copy", "shallow copy", "memory"],
+      "answer_hints": "Explain how each type works, use copy module, discuss nested objects and references."
+    },
+    {
+      "question": "Explain the difference between a stack and a queue. Implement both.",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Easy",
+      "keywords": ["data structures", "stack", "queue", "LIFO", "FIFO"],
+      "answer_hints": "Explain LIFO vs FIFO, common operations, use cases, and implementation using arrays or linked lists."
+    },
+    {
+      "question": "How would you detect a cycle in a linked list?",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Medium",
+      "keywords": ["linked list", "cycle detection", "Floyd's algorithm", "two pointers"],
+      "answer_hints": "Explain Floyd's cycle detection (tortoise and hare), time and space complexity O(n) and O(1)."
+    },
+    {
+      "question": "Explain different sorting algorithms and their time complexities.",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Medium",
+      "keywords": ["sorting", "algorithms", "quicksort", "mergesort", "time complexity"],
+      "answer_hints": "Cover QuickSort O(n log n) avg, MergeSort O(n log n), HeapSort, and when to use each."
+    },
+    {
+      "question": "What is a Binary Search Tree? How do you balance it?",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Hard",
+      "keywords": ["BST", "binary tree", "balanced tree", "AVL tree", "red-black tree"],
+      "answer_hints": "Explain BST properties, balancing techniques (AVL, Red-Black trees), rotations, time complexity."
+    },
+    {
+      "question": "Implement an LRU Cache with O(1) operations.",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Hard",
+      "keywords": ["LRU cache", "hash map", "doubly linked list", "cache", "optimization"],
+      "answer_hints": "Use hash map + doubly linked list, explain get/put operations, capacity handling."
+    },
+    {
+      "question": "Explain dynamic programming with an example.",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Medium",
+      "keywords": ["dynamic programming", "memoization", "optimization", "algorithms"],
+      "answer_hints": "Use Fibonacci or coin change example, explain memoization vs tabulation, optimal substructure."
+    },
+    {
+      "question": "How would you find the kth largest element in an unsorted array?",
+      "category": "Data Structures & Algorithms",
+      "difficulty": "Medium",
+      "keywords": ["array", "quickselect", "heap", "algorithms"],
+      "answer_hints": "Discuss QuickSelect O(n) average, Min-Heap O(n log k), sorting O(n log n) approaches."
+    },
+    {
+      "question": "Design a URL shortening service like bit.ly.",
+      "category": "System Design",
+      "difficulty": "Hard",
+      "keywords": ["system design", "url shortener", "scalability", "hashing", "database"],
+      "answer_hints": "Discuss hashing strategies, database schema, collision handling, scalability, caching, analytics."
+    },
+    {
+      "question": "How would you design a rate limiter?",
+      "category": "System Design",
+      "difficulty": "Medium",
+      "keywords": ["rate limiting", "system design", "token bucket", "sliding window"],
+      "answer_hints": "Explain token bucket, sliding window algorithms, distributed rate limiting with Redis."
+    },
+    {
+      "question": "Design a distributed cache system.",
+      "category": "System Design",
+      "difficulty": "Hard",
+      "keywords": ["distributed cache", "consistent hashing", "redis", "memcached", "scalability"],
+      "answer_hints": "Discuss consistent hashing, replication, eviction policies, cache invalidation strategies."
+    },
+    {
+      "question": "How would you design a news feed system like Twitter?",
+      "category": "System Design",
+      "difficulty": "Hard",
+      "keywords": ["system design", "news feed", "social media", "scalability", "fanout"],
+      "answer_hints": "Discuss fanout-on-write vs fanout-on-read, timeline generation, ranking, caching strategies."
+    },
+    {
+      "question": "Explain CAP theorem and its implications.",
+      "category": "System Design",
+      "difficulty": "Medium",
+      "keywords": ["CAP theorem", "distributed systems", "consistency", "availability", "partition tolerance"],
+      "answer_hints": "Define Consistency, Availability, Partition Tolerance. Explain trade-offs and real-world examples."
+    },
+    {
+      "question": "How would you design a recommendation system?",
+      "category": "System Design",
+      "difficulty": "Hard",
+      "keywords": ["recommendation system", "collaborative filtering", "content-based", "machine learning"],
+      "answer_hints": "Discuss collaborative filtering, content-based filtering, hybrid approaches, cold start problem, scalability."
+    },
+    {
+      "question": "Explain the bias-variance tradeoff in machine learning.",
+      "category": "Machine Learning",
+      "difficulty": "Medium",
+      "keywords": ["bias", "variance", "tradeoff", "overfitting", "underfitting"],
+      "answer_hints": "Define bias and variance, explain underfitting vs overfitting, optimal balance, regularization."
+    },
+    {
+      "question": "What is cross-validation and why is it important?",
+      "category": "Machine Learning",
+      "difficulty": "Easy",
+      "keywords": ["cross-validation", "k-fold", "model evaluation", "overfitting"],
+      "answer_hints": "Explain k-fold CV, stratified CV, prevents overfitting, better model generalization assessment."
+    },
+    {
+      "question": "Explain different types of regularization techniques.",
+      "category": "Machine Learning",
+      "difficulty": "Medium",
+      "keywords": ["regularization", "L1", "L2", "ridge", "lasso", "elastic net"],
+      "answer_hints": "Cover L1 (Lasso), L2 (Ridge), Elastic Net. Explain feature selection, overfitting prevention."
+    },
+    {
+      "question": "How does gradient descent work? What are its variants?",
+      "category": "Machine Learning",
+      "difficulty": "Medium",
+      "keywords": ["gradient descent", "optimization", "SGD", "adam", "learning rate"],
+      "answer_hints": "Explain basic GD, SGD, Mini-batch GD, Adam, RMSprop. Discuss learning rate, convergence."
+    },
+    {
+      "question": "What is the difference between bagging and boosting?",
+      "category": "Machine Learning",
+      "difficulty": "Medium",
+      "keywords": ["ensemble learning", "bagging", "boosting", "random forest", "xgboost"],
+      "answer_hints": "Bagging (parallel, reduces variance), Boosting (sequential, reduces bias). Examples: Random Forest vs XGBoost."
+    },
+    {
+      "question": "Explain the Random Forest algorithm and its advantages.",
+      "category": "Machine Learning",
+      "difficulty": "Medium",
+      "keywords": ["random forest", "ensemble", "decision trees", "bagging"],
+      "answer_hints": "Multiple decision trees, bootstrap sampling, feature randomness, reduces overfitting, handles missing data."
+    },
+    {
+      "question": "How do you handle imbalanced datasets?",
+      "category": "Machine Learning",
+      "difficulty": "Medium",
+      "keywords": ["imbalanced data", "SMOTE", "undersampling", "oversampling", "class weights"],
+      "answer_hints": "Resampling (SMOTE, undersampling), class weights, different metrics (F1, AUC-ROC), ensemble methods."
+    },
+    {
+      "question": "What is feature engineering and why is it important?",
+      "category": "Machine Learning",
+      "difficulty": "Easy",
+      "keywords": ["feature engineering", "features", "preprocessing", "model performance"],
+      "answer_hints": "Creating new features, transformations, encoding, normalization. Often more important than model choice."
+    },
+    {
+      "question": "Explain precision, recall, and F1-score.",
+      "category": "Machine Learning",
+      "difficulty": "Easy",
+      "keywords": ["metrics", "precision", "recall", "F1-score", "evaluation"],
+      "answer_hints": "Precision = TP/(TP+FP), Recall = TP/(TP+FN), F1 = harmonic mean. When to use each metric."
+    },
+    {
+      "question": "What is a confusion matrix and how do you interpret it?",
+      "category": "Machine Learning",
+      "difficulty": "Easy",
+      "keywords": ["confusion matrix", "classification", "metrics", "evaluation"],
+      "answer_hints": "2x2 matrix for binary classification: TP, TN, FP, FN. Derive accuracy, precision, recall from it."
+    },
+    {
+      "question": "Explain backpropagation in neural networks.",
+      "category": "Deep Learning",
+      "difficulty": "Medium",
+      "keywords": ["backpropagation", "neural networks", "gradient", "chain rule"],
+      "answer_hints": "Chain rule application, computing gradients, updating weights, forward and backward pass."
+    },
+    {
+      "question": "What are activation functions? Compare different types.",
+      "category": "Deep Learning",
+      "difficulty": "Medium",
+      "keywords": ["activation functions", "ReLU", "sigmoid", "tanh", "neural networks"],
+      "answer_hints": "ReLU (most common), Sigmoid, Tanh, Leaky ReLU. Discuss vanishing gradient, dead neurons."
+    },
+    {
+      "question": "Explain the vanishing gradient problem and solutions.",
+      "category": "Deep Learning",
+      "difficulty": "Hard",
+      "keywords": ["vanishing gradient", "deep learning", "optimization", "initialization"],
+      "answer_hints": "Problem in deep networks, ReLU activation, batch normalization, residual connections, proper initialization."
+    },
+    {
+      "question": "What is batch normalization and why is it useful?",
+      "category": "Deep Learning",
+      "difficulty": "Medium",
+      "keywords": ["batch normalization", "deep learning", "training stability", "normalization"],
+      "answer_hints": "Normalizes layer inputs, stabilizes training, allows higher learning rates, reduces internal covariate shift."
+    },
+    {
+      "question": "Explain CNNs and their applications.",
+      "category": "Deep Learning",
+      "difficulty": "Medium",
+      "keywords": ["CNN", "convolutional neural network", "computer vision", "image processing"],
+      "answer_hints": "Convolution layers, pooling, feature maps, hierarchical features. Used in image classification, detection."
+    },
+    {
+      "question": "What are RNNs and LSTMs? When would you use them?",
+      "category": "Deep Learning",
+      "difficulty": "Medium",
+      "keywords": ["RNN", "LSTM", "sequence", "time series", "recurrent"],
+      "answer_hints": "Sequential data processing, LSTM solves vanishing gradient in RNNs. Applications: NLP, time series."
+    },
+    {
+      "question": "Explain the Transformer architecture.",
+      "category": "Deep Learning",
+      "difficulty": "Hard",
+      "keywords": ["transformer", "attention", "BERT", "GPT", "self-attention"],
+      "answer_hints": "Self-attention mechanism, multi-head attention, positional encoding, encoder-decoder. Powers GPT, BERT."
+    },
+    {
+      "question": "What is transfer learning and when should you use it?",
+      "category": "Deep Learning",
+      "difficulty": "Medium",
+      "keywords": ["transfer learning", "pre-trained models", "fine-tuning", "feature extraction"],
+      "answer_hints": "Using pre-trained models, fine-tuning, feature extraction. Useful when limited data, saves training time."
+    },
+    {
+      "question": "How do you prevent overfitting in deep learning?",
+      "category": "Deep Learning",
+      "difficulty": "Medium",
+      "keywords": ["overfitting", "regularization", "dropout", "early stopping"],
+      "answer_hints": "Dropout, L2 regularization, data augmentation, early stopping, batch normalization, more data."
+    },
+    {
+      "question": "Explain the attention mechanism in neural networks.",
+      "category": "Deep Learning",
+      "difficulty": "Hard",
+      "keywords": ["attention", "mechanism", "transformer", "NLP", "weights"],
+      "answer_hints": "Weighted importance to different parts of input, query-key-value, multi-head attention, self-attention."
+    },
+    {
+      "question": "What is word embedding? Explain Word2Vec.",
+      "category": "NLP",
+      "difficulty": "Medium",
+      "keywords": ["word embedding", "word2vec", "NLP", "vector representation"],
+      "answer_hints": "Dense vector representations, captures semantic meaning, Word2Vec (Skip-gram, CBOW), similar words close in space."
+    },
+    {
+      "question": "Explain the difference between BERT and GPT.",
+      "category": "NLP",
+      "difficulty": "Hard",
+      "keywords": ["BERT", "GPT", "transformer", "NLP", "language model"],
+      "answer_hints": "BERT: bidirectional, masked LM, encoder-only. GPT: unidirectional, autoregressive, decoder-only. Different use cases."
+    },
+    {
+      "question": "How does TF-IDF work?",
+      "category": "NLP",
+      "difficulty": "Easy",
+      "keywords": ["TF-IDF", "text processing", "NLP", "feature extraction"],
+      "answer_hints": "Term Frequency × Inverse Document Frequency. Measures word importance, common words downweighted."
+    },
+    {
+      "question": "What is tokenization and why is it important in NLP?",
+      "category": "NLP",
+      "difficulty": "Easy",
+      "keywords": ["tokenization", "NLP", "preprocessing", "text processing"],
+      "answer_hints": "Breaking text into tokens (words/subwords), different strategies (word, subword, character), handling of special cases."
+    },
+    {
+      "question": "Explain named entity recognition (NER) and its applications.",
+      "category": "NLP",
+      "difficulty": "Medium",
+      "keywords": ["NER", "named entity recognition", "NLP", "information extraction"],
+      "answer_hints": "Identifying entities (person, organization, location), sequence labeling, applications in search, QA systems."
+    },
+    {
+      "question": "How would you build a sentiment analysis system?",
+      "category": "NLP",
+      "difficulty": "Medium",
+      "keywords": ["sentiment analysis", "NLP", "classification", "text analysis"],
+      "answer_hints": "Preprocessing, feature extraction (TF-IDF, embeddings), classification models, handling negation, sarcasm challenges."
+    },
+    {
+      "question": "What is the difference between stemming and lemmatization?",
+      "category": "NLP",
+      "difficulty": "Easy",
+      "keywords": ["stemming", "lemmatization", "NLP", "text normalization"],
+      "answer_hints": "Stemming: crude chopping (running→run), Lemmatization: vocabulary-based (better→good). Lemma more accurate."
+    },
+    {
+      "question": "Explain how RAG (Retrieval Augmented Generation) works.",
+      "category": "NLP",
+      "difficulty": "Hard",
+      "keywords": ["RAG", "retrieval", "generation", "LLM", "vector database"],
+      "answer_hints": "Retrieves relevant documents, passes to LLM for generation, combines retrieval + generation, reduces hallucination."
+    },
+    {
+      "question": "What is the difference between INNER JOIN and LEFT JOIN?",
+      "category": "SQL & Databases",
+      "difficulty": "Easy",
+      "keywords": ["SQL", "join", "inner join", "left join", "database"],
+      "answer_hints": "INNER: only matching rows. LEFT: all from left table + matches from right. Include examples."
+    },
+    {
+      "question": "How do you optimize a slow SQL query?",
+      "category": "SQL & Databases",
+      "difficulty": "Medium",
+      "keywords": ["SQL", "optimization", "indexing", "query performance", "database"],
+      "answer_hints": "Add indexes, avoid SELECT *, use EXPLAIN, optimize JOINs, denormalization, query rewriting."
+    },
+    {
+      "question": "Explain database normalization and its normal forms.",
+      "category": "SQL & Databases",
+      "difficulty": "Medium",
+      "keywords": ["normalization", "database design", "1NF", "2NF", "3NF"],
+      "answer_hints": "Reducing redundancy, 1NF (atomic), 2NF (no partial dependency), 3NF (no transitive dependency). Trade-offs."
+    },
+    {
+      "question": "What is database indexing? When should you use it?",
+      "category": "SQL & Databases",
+      "difficulty": "Medium",
+      "keywords": ["indexing", "database", "B-tree", "performance", "optimization"],
+      "answer_hints": "Data structure for fast lookup (B-tree), speeds up SELECT, slows INSERT/UPDATE. Index on frequently queried columns."
+    },
+    {
+      "question": "Explain ACID properties in databases.",
+      "category": "SQL & Databases",
+      "difficulty": "Medium",
+      "keywords": ["ACID", "transaction", "database", "consistency", "atomicity"],
+      "answer_hints": "Atomicity, Consistency, Isolation, Durability. Ensures reliable transactions, examples of each property."
+    },
+    {
+      "question": "What is the difference between SQL and NoSQL databases?",
+      "category": "SQL & Databases",
+      "difficulty": "Easy",
+      "keywords": ["SQL", "NoSQL", "database", "relational", "document store"],
+      "answer_hints": "SQL: structured, ACID, schemas. NoSQL: flexible schema, horizontal scaling, eventual consistency. Use cases."
+    },
+    {
+      "question": "Explain sharding in databases.",
+      "category": "SQL & Databases",
+      "difficulty": "Hard",
+      "keywords": ["sharding", "partitioning", "scalability", "distributed database"],
+      "answer_hints": "Horizontal partitioning across servers, shard key selection, benefits (scalability), challenges (joins, transactions)."
+    },
+    {
+      "question": "What is a database transaction? Explain isolation levels.",
+      "category": "SQL & Databases",
+      "difficulty": "Hard",
+      "keywords": ["transaction", "isolation levels", "concurrency", "database"],
+      "answer_hints": "Unit of work, isolation levels: Read Uncommitted, Read Committed, Repeatable Read, Serializable. Trade-offs."
+    },
+    {
+      "question": "Explain the differences between AWS EC2, Lambda, and ECS.",
+      "category": "Cloud Computing",
+      "difficulty": "Medium",
+      "keywords": ["AWS", "EC2", "Lambda", "ECS", "cloud", "serverless"],
+      "answer_hints": "EC2: VMs, Lambda: serverless functions, ECS: container orchestration. Use cases and pricing models."
+    },
+    {
+      "question": "What is auto-scaling and how does it work in cloud?",
+      "category": "Cloud Computing",
+      "difficulty": "Medium",
+      "keywords": ["auto-scaling", "cloud", "elasticity", "load balancing"],
+      "answer_hints": "Automatic resource adjustment based on demand, metrics-based (CPU, requests), scale up/down policies."
+    },
+    {
+      "question": "Explain the difference between vertical and horizontal scaling.",
+      "category": "Cloud Computing",
+      "difficulty": "Easy",
+      "keywords": ["scaling", "vertical", "horizontal", "cloud", "architecture"],
+      "answer_hints": "Vertical: more powerful machine (scale up). Horizontal: more machines (scale out). Trade-offs and use cases."
+    },
+    {
+      "question": "What is a CDN and why is it important?",
+      "category": "Cloud Computing",
+      "difficulty": "Easy",
+      "keywords": ["CDN", "content delivery", "caching", "latency", "cloud"],
+      "answer_hints": "Content Delivery Network, edge locations, reduces latency, caches static content, improves performance globally."
+    },
+    {
+      "question": "Explain Infrastructure as Code (IaC).",
+      "category": "Cloud Computing",
+      "difficulty": "Medium",
+      "keywords": ["IaC", "terraform", "cloudformation", "infrastructure", "automation"],
+      "answer_hints": "Managing infrastructure through code (Terraform, CloudFormation), version control, reproducibility, automation."
+    },
+    {
+      "question": "What is the difference between S3, EBS, and EFS in AWS?",
+      "category": "Cloud Computing",
+      "difficulty": "Medium",
+      "keywords": ["AWS", "S3", "EBS", "EFS", "storage"],
+      "answer_hints": "S3: object storage, EBS: block storage for EC2, EFS: shared file system. Use cases and performance characteristics."
+    },
+    {
+      "question": "What is Docker and why is it useful?",
+      "category": "DevOps",
+      "difficulty": "Easy",
+      "keywords": ["docker", "container", "containerization", "devops"],
+      "answer_hints": "Containerization platform, packages app + dependencies, consistency across environments, lightweight vs VMs."
+    },
+    {
+      "question": "Explain the difference between Docker and Kubernetes.",
+      "category": "DevOps",
+      "difficulty": "Medium",
+      "keywords": ["docker", "kubernetes", "orchestration", "containers"],
+      "answer_hints": "Docker: containerization platform. Kubernetes: orchestration system for containers. Scaling, deployment, management."
+    },
+    {
+      "question": "What is CI/CD and why is it important?",
+      "category": "DevOps",
+      "difficulty": "Easy",
+      "keywords": ["CI/CD", "continuous integration", "continuous deployment", "automation"],
+      "answer_hints": "Continuous Integration/Deployment, automated testing and deployment, faster releases, reduce errors."
+    },
+    {
+      "question": "How would you implement a zero-downtime deployment?",
+      "category": "DevOps",
+      "difficulty": "Hard",
+      "keywords": ["deployment", "zero-downtime", "blue-green", "rolling update", "devops"],
+      "answer_hints": "Blue-green deployment, rolling updates, canary releases, load balancer traffic shifting, health checks."
+    },
+    {
+      "question": "What is infrastructure monitoring and what tools do you use?",
+      "category": "DevOps",
+      "difficulty": "Medium",
+      "keywords": ["monitoring", "observability", "prometheus", "grafana", "cloudwatch"],
+      "answer_hints": "Tracking system health, metrics (CPU, memory, requests), tools: Prometheus, Grafana, CloudWatch, ELK stack."
+    },
+    {
+      "question": "Explain the concept of immutable infrastructure.",
+      "category": "DevOps",
+      "difficulty": "Medium",
+      "keywords": ["immutable infrastructure", "devops", "deployment", "consistency"],
+      "answer_hints": "Servers never modified after deployment, replace instead of update, consistency, easier rollback."
+    },
+    {
+      "question": "Tell me about a time you faced a difficult technical challenge. How did you overcome it?",
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "keywords": ["behavioral", "problem solving", "technical challenge", "STAR"],
+      "answer_hints": "Use STAR method: Situation, Task, Action, Result. Show problem-solving skills, persistence, learning."
+    },
+    {
+      "question": "Describe a situation where you had to work with a difficult team member.",
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "keywords": ["behavioral", "teamwork", "conflict resolution", "communication"],
+      "answer_hints": "Focus on communication, empathy, finding common ground, professional resolution. Show emotional intelligence."
+    },
+    {
+      "question": "Tell me about a time you failed. What did you learn?",
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "keywords": ["behavioral", "failure", "learning", "growth mindset", "resilience"],
+      "answer_hints": "Be honest, show accountability, emphasize learning and growth, what you'd do differently."
+    },
+    {
+      "question": "How do you prioritize tasks when everything is urgent?",
+      "category": "Behavioral",
+      "difficulty": "Easy",
+      "keywords": ["behavioral", "prioritization", "time management", "organization"],
+      "answer_hints": "Impact vs effort matrix, communicate with stakeholders, realistic expectations, focus on high-impact tasks."
+    },
+    {
+      "question": "Describe a time when you had to learn a new technology quickly.",
+      "category": "Behavioral",
+      "difficulty": "Easy",
+      "keywords": ["behavioral", "learning", "adaptability", "new technology"],
+      "answer_hints": "Learning approach, resources used, how you applied it, results achieved. Show quick learner mentality."
+    },
+    {
+      "question": "Tell me about a project you're most proud of.",
+      "category": "Behavioral",
+      "difficulty": "Easy",
+      "keywords": ["behavioral", "achievement", "project", "impact"],
+      "answer_hints": "Choose project with clear impact, your specific contributions, challenges overcome, measurable results."
+    },
+    {
+      "question": "How do you handle disagreements about technical decisions?",
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "keywords": ["behavioral", "conflict", "technical decision", "communication"],
+      "answer_hints": "Data-driven approach, listen to others, document trade-offs, escalate if needed, team consensus."
+    },
+    {
+      "question": "Describe a time you had to give critical feedback.",
+      "category": "Behavioral",
+      "difficulty": "Medium",
+      "keywords": ["behavioral", "feedback", "communication", "leadership"],
+      "answer_hints": "Private setting, constructive approach, specific examples, focus on behavior not person, follow-up."
+    },
+    {
+      "question": "What is your approach to code review?",
+      "category": "General Software Engineering",
+      "difficulty": "Easy",
+      "keywords": ["code review", "best practices", "collaboration", "quality"],
+      "answer_hints": "Focus on logic, readability, maintainability, be constructive, catch bugs, knowledge sharing."
+    },
+    {
+      "question": "Explain the SOLID principles.",
+      "category": "General Software Engineering",
+      "difficulty": "Medium",
+      "keywords": ["SOLID", "design patterns", "OOP", "software design"],
+      "answer_hints": "Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion. Examples."
+    },
+    {
+      "question": "What is technical debt and how do you manage it?",
+      "category": "General Software Engineering",
+      "difficulty": "Medium",
+      "keywords": ["technical debt", "code quality", "refactoring", "maintenance"],
+      "answer_hints": "Shortcuts that need future work, track in backlog, balance new features vs refactoring, communicate cost."
+    },
+    {
+      "question": "How do you ensure code quality?",
+      "category": "General Software Engineering",
+      "difficulty": "Easy",
+      "keywords": ["code quality", "testing", "best practices", "clean code"],
+      "answer_hints": "Unit tests, code reviews, linting, CI/CD, documentation, follow style guides, refactoring."
+    },
+    {
+      "question": "Explain microservices architecture and its trade-offs.",
+      "category": "General Software Engineering",
+      "difficulty": "Hard",
+      "keywords": ["microservices", "architecture", "distributed systems", "scalability"],
+      "answer_hints": "Independent services, benefits (scalability, independence), challenges (complexity, distributed issues), vs monolith."
+    },
+    {
+      "question": "What is REST API? What makes a good API design?",
+      "category": "General Software Engineering",
+      "difficulty": "Easy",
+      "keywords": ["REST", "API", "web services", "design"],
+      "answer_hints": "HTTP methods, stateless, resource-based, good design: consistent, versioned, documented, intuitive endpoints."
+    },
+    {
+      "question": "How do you approach debugging a production issue?",
+      "category": "General Software Engineering",
+      "difficulty": "Medium",
+      "keywords": ["debugging", "troubleshooting", "production", "problem solving"],
+      "answer_hints": "Check logs, reproduce issue, isolate problem, systematic approach, fix and test, post-mortem analysis."
+    },
+    {
+      "question": "What is your testing strategy for a new feature?",
+      "category": "General Software Engineering",
+      "difficulty": "Medium",
+      "keywords": ["testing", "quality assurance", "unit tests", "integration tests"],
+      "answer_hints": "Unit tests, integration tests, end-to-end tests, edge cases, test pyramid, automated testing in CI/CD."
+    }
+  ]
+}
