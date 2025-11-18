@@ -43,30 +43,15 @@ def test_config():
     try:
         from config.config import Config
         
-        # Check provider and API key
-        provider = Config.LLM_PROVIDER
-        print(f"   [OK] LLM Provider: {provider}")
+        # Check Groq API key
+        if not Config.GROQ_API_KEY or Config.GROQ_API_KEY == "":
+            print("   [FAIL] Groq API key not set")
+            print("   Get FREE key at: https://console.groq.com/")
+            return False
         
-        if provider == "groq":
-            if not Config.GROQ_API_KEY or Config.GROQ_API_KEY == "":
-                print("   [FAIL] Groq API key not set")
-                print("   Get FREE key at: https://console.groq.com/")
-                return False
-            print(f"   [OK] Groq API key: {'*' * 20}{Config.GROQ_API_KEY[-4:]}")
-        elif provider == "ollama":
-            print("   [OK] Ollama (local) - no API key needed")
-        elif provider == "anthropic":
-            if not Config.ANTHROPIC_API_KEY:
-                print("   [FAIL] Anthropic API key not set")
-                return False
-            print(f"   [OK] Anthropic API key: {'*' * 20}{Config.ANTHROPIC_API_KEY[-4:]}")
-        else:
-            print(f"   [WARNING] Unknown provider: {provider}")
-        
+        print(f"   [OK] Groq API key: {'*' * 20}{Config.GROQ_API_KEY[-4:]}")
         print(f"   [OK] Model: {Config.LLM_MODEL}")
-        
-        embedding_info = "local (sentence-transformers)" if Config.EMBEDDING_PROVIDER == "local" else Config.EMBEDDING_MODEL
-        print(f"   [OK] Embedding: {embedding_info}")
+        print(f"   [OK] Embedding: local (sentence-transformers)")
         
         return True
         
@@ -91,12 +76,12 @@ def test_llm_connection():
             max_tokens=10
         )
         
-        print(f"   [OK] {Config.LLM_PROVIDER.upper()} API connection successful!")
+        print(f"   [OK] Groq API connection successful!")
         print(f"   Response: {response}")
         return True
         
     except Exception as e:
-        print(f"   [FAIL] LLM API error: {str(e)}")
+        print(f"   [FAIL] Groq API error: {str(e)}")
         print(f"   Check your API key and internet connection")
         return False
 

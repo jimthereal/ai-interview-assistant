@@ -11,17 +11,11 @@ load_dotenv()
 class Config:
     """Application configuration"""
     
-    # LLM Provider Selection
-    LLM_PROVIDER = os.getenv("LLM_PROVIDER", "groq").lower()
-    
-    # API Keys
+    # API Key - Groq only
     GROQ_API_KEY = os.getenv("GROQ_API_KEY", "")
-    ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY", "")
     
     # Model Configuration
-    LLM_MODEL = os.getenv("LLM_MODEL", "llama-3.1-70b-versatile")
-    EMBEDDING_PROVIDER = os.getenv("EMBEDDING_PROVIDER", "local")
-    EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
+    LLM_MODEL = os.getenv("LLM_MODEL", "llama-3.3-70b-versatile")
     TEMPERATURE = float(os.getenv("TEMPERATURE", "0.7"))
     
     # Vector Database
@@ -57,22 +51,11 @@ class Config:
     @classmethod
     def validate(cls):
         """Validate required configuration"""
-        # Check if LLM provider is configured
-        if cls.LLM_PROVIDER == "groq" and not cls.GROQ_API_KEY:
+        if not cls.GROQ_API_KEY:
             raise ValueError(
-                "GROQ_API_KEY is required when using Groq provider.\n"
+                "GROQ_API_KEY is required.\n"
                 "Get a FREE API key at: https://console.groq.com/\n"
                 "Then add it to your .env file."
-            )
-        elif cls.LLM_PROVIDER == "anthropic" and not cls.ANTHROPIC_API_KEY:
-            raise ValueError(
-                "ANTHROPIC_API_KEY is required when using Anthropic provider.\n"
-                "Please set it in .env file or switch to Groq (free)."
-            )
-        elif cls.LLM_PROVIDER not in ["groq", "anthropic", "ollama"]:
-            raise ValueError(
-                f"Unknown LLM_PROVIDER: {cls.LLM_PROVIDER}\n"
-                "Valid options: groq, anthropic, ollama"
             )
         
         # Create necessary directories

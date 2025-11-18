@@ -2,10 +2,8 @@
 streamlit==1.29.0
 python-dotenv==1.0.0
 
-# LLM Providers (choose one or install all)
-groq>=0.4.0  # Free API - RECOMMENDED
-# openai==1.6.1  # Optional - if you have API key
-# anthropic==0.8.1  # Optional - if you have API key
+# LLM Provider
+groq>=0.4.0  # Groq API - Free tier available
 
 # Vector Database and Embeddings
 chromadb==0.4.22

@@ -1,77 +1,36 @@
 """
 LLM Service Module
-Handles interactions with multiple LLM providers (Groq, Anthropic, Ollama)
+Handles interactions with Groq API for LLM operations
 """
 from typing import Dict, List, Optional
 from config.config import Config
+from groq import Groq
 
 
 class LLMService:
-    """Service for LLM-based answer generation and analysis"""
+    """Service for LLM-based answer generation and analysis using Groq"""
     
     def __init__(self):
-        """Initialize LLM service with configured provider"""
-        self.provider = Config.LLM_PROVIDER
+        """Initialize LLM service with Groq"""
         self.model = Config.LLM_MODEL
         self.temperature = Config.TEMPERATURE
-        
-        # Initialize the appropriate client
-        if self.provider == "groq":
-            from groq import Groq
-            self.client = Groq(api_key=Config.GROQ_API_KEY)
-        elif self.provider == "anthropic":
-            import anthropic
-            self.client = anthropic.Anthropic(api_key=Config.ANTHROPIC_API_KEY)
-        elif self.provider == "ollama":
-            try:
-                import ollama
-                self.client = ollama
-            except ImportError:
-                raise ImportError(
-                    "Ollama not found. Install with: pip install ollama\n"
-                    "Or download from: https://ollama.ai/"
-                )
-        else:
-            raise ValueError(f"Unsupported LLM provider: {self.provider}")
+        self.client = Groq(api_key=Config.GROQ_API_KEY)
     
     def _call_llm(self, messages: List[Dict], max_tokens: int = None) -> str:
-        """Call the configured LLM provider"""
+        """Call Groq API"""
         if max_tokens is None:
             max_tokens = Config.ANSWER_MAX_TOKENS
         
         try:
-            if self.provider == "groq":
-                response = self.client.chat.completions.create(
-                    model=self.model,
-                    messages=messages,
-                    temperature=self.temperature,
-                    max_tokens=max_tokens
-                )
-                return response.choices[0].message.content.strip()
-            
-            elif self.provider == "anthropic":
-                # Anthropic has different API format
-                system_msg = next((m["content"] for m in messages if m["role"] == "system"), "")
-                user_messages = [m for m in messages if m["role"] != "system"]
-                
-                response = self.client.messages.create(
-                    model=self.model,
-                    system=system_msg,
-                    messages=user_messages,
-                    temperature=self.temperature,
-                    max_tokens=max_tokens
-                )
-                return response.content[0].text.strip()
-            
-            elif self.provider == "ollama":
-                response = self.client.chat(
-                    model=self.model,
-                    messages=messages
-                )
-                return response['message']['content'].strip()
-        
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages,
+                temperature=self.temperature,
+                max_tokens=max_tokens
+            )
+            return response.choices[0].message.content.strip()
         except Exception as e:
-            raise Exception(f"Error calling {self.provider}: {str(e)}")
+            raise Exception(f"Error calling Groq API: {str(e)}")
     
     def generate_answer(
         self,
