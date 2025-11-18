@@ -1,6 +1,11 @@
 # Environment Variables
 .env
 
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -47,6 +52,3 @@ data/chroma_db/
 # OS
 .DS_Store
 Thumbs.db
-
-# Streamlit
-.streamlit/secrets.toml
