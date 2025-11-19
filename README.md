@@ -1,38 +1,17 @@
 # AI Interview Assistant
 
-An intelligent interview assistant powered by RAG (Retrieval-Augmented Generation) and Large Language Models.
-
-[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
-[![Groq](https://img.shields.io/badge/Groq-Llama_3.3-green.svg)](https://groq.com/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-teal.svg)](https://fastapi.tiangolo.com/)
-[![React](https://img.shields.io/badge/React-18.0+-61DAFB.svg)](https://reactjs.org/)
-
----
-
-## Table of Contents
-
-- [About](#about)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-- [How to Use](#how-to-use)
-- [API Documentation](#api-documentation)
-- [Deployment](#deployment)
-
----
+AI-powered interview preparation tool using RAG and Large Language Models to analyze job descriptions and provide personalized practice questions with detailed feedback.
 
 ## About
 
-AI Interview Assistant helps you prepare for technical interviews by analyzing job descriptions and providing personalized practice questions with AI-generated answers and feedback.
-
 **What it does:**
-- Analyzes job descriptions to identify key skills and requirements
-- Finds relevant interview questions using semantic search
-- Generates personalized model answers tailored to the job
-- Evaluates your responses with detailed feedback
-- Tracks your practice progress over time
+- Analyzes job descriptions (paste text, upload files, or scrape URLs)
+- Matches relevant interview questions from 150+ curated database
+- Generates AI-powered model answers tailored to the job
+- Evaluates your responses with detailed scoring and feedback
+- Tracks practice progress and improvement trends
 
-**Completely FREE** - No API subscriptions required. Built with Groq's free tier.
+**Tech Stack:** Python, FastAPI, React, ChromaDB, Groq API (Free)
 
 ---
 
