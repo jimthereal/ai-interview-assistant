@@ -70,41 +70,6 @@ Render Cloud (Backend - FastAPI)
 Groq API (LLM Inference)
 ```
 
-## 🚀 Quick Start
-
-### Prerequisites
-- Python 3.10+
-- Node.js 18+
-- [Groq API Key](https://console.groq.com/) (FREE)
-
-### Installation
-
-```bash
-# 1. Clone repository
-git clone https://github.com/jimthereal/ai-interview-assistant.git
-cd ai-interview-assistant
-
-# 2. Backend setup
-conda create -n ai-interview-assistant python=3.10
-conda activate ai-interview-assistant
-pip install -r requirements.txt
-
-# 3. Configure environment
-copy .env.example .env
-# Add your GROQ_API_KEY to .env
-
-# 4. Frontend setup
-cd frontend
-npm install
-cd ..
-
-# 5. Run (open 2 terminals)
-# Terminal 1: .\start_backend.bat
-# Terminal 2: .\start_frontend.bat
-
-# 6. Open http://localhost:5173
-```
-
 ## 💡 How to Use
 
 ### 1️⃣ **Analyze Job Description**
@@ -147,32 +112,6 @@ Get AI-extracted skills and matched questions.
 - **Cloud-Native:** Designed for serverless/container deployments
 - **Free Tier Optimized:** Runs on free Render + Vercel tiers
 
-## 📦 Project Structure
-
-```
-ai-interview-assistant/
-├── api/                    # FastAPI backend
-│   ├── main.py            # App entry, CORS config
-│   ├── routes/            # API endpoints
-│   └── models/            # Pydantic schemas
-├── src/                   # Core business logic
-│   ├── llm_service.py     # Groq API integration
-│   ├── jd_analyzer.py     # Job description analysis
-│   ├── answer_evaluator.py # Answer scoring
-│   ├── vector_store.py    # Search (adaptive)
-│   └── content_extractor.py # PDF/DOCX/URL parsing
-├── frontend/              # React application
-│   ├── src/
-│   │   ├── pages/        # Page components
-│   │   ├── components/   # Reusable UI
-│   │   ├── api/          # API client
-│   │   └── store/        # State management
-│   └── dist/             # Build output
-├── data/
-│   └── interview_questions.json # 150 questions
-└── requirements.txt       # Python dependencies
-```
-
 ## 🌐 Deployment
 
 This project is production-ready and deployed on:
@@ -193,15 +132,6 @@ PYTHON_VERSION=3.10.0
 VITE_API_URL=https://your-backend.onrender.com
 ```
 
-## 🔥 Recent Updates
-
-- ✅ **Cloud Deployment** - Live on Vercel + Render
-- ✅ **Multi-Input Support** - Text, File, URL parsing
-- ✅ **Memory Optimization** - Adaptive search algorithms
-- ✅ **Practice Redesign** - List + Detail view
-- ✅ **Progress Tracking** - Local state with persistence
-- ✅ **Production Ready** - CORS, error handling, logging
-
 ## 📊 Statistics
 
 - **150+ Questions** across 11 categories
@@ -213,10 +143,6 @@ VITE_API_URL=https://your-backend.onrender.com
 ## 🤝 Contributing
 
 This is a personal project, but suggestions and feedback are welcome! Feel free to open issues or submit pull requests.
-
-## 📄 License
-
-Open source for educational and personal use.
 
 ## 🙏 Acknowledgments
 
