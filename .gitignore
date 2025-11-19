@@ -46,6 +46,9 @@ data/chroma_db/
 *.db
 *.sqlite
 
+# bat
+*.bat
+
 # Logs
 *.log
 
