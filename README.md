@@ -1,6 +1,24 @@
 # AI Interview Assistant
 
-AI-powered interview preparation tool using RAG and Large Language Models to analyze job descriptions and provide personalized practice questions with detailed feedback.
+An intelligent .
+
+AI-powered interview assistant powered by RAG (Retrieval-Augmented Generation) and LLMs (Large Language Models) to analyze job descriptions and provide personalized practice questions with detailed feedback.
+
+[![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Groq](https://img.shields.io/badge/Groq-Llama_3.3-green.svg)](https://groq.com/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-teal.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18.0+-61DAFB.svg)](https://reactjs.org/)
+
+---
+
+## Table of Contents
+
+- [About](#about)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [How to Use](#how-to-use)
+
+---
 
 ## About
 
@@ -11,17 +29,15 @@ AI-powered interview preparation tool using RAG and Large Language Models to ana
 - Evaluates your responses with detailed scoring and feedback
 - Tracks practice progress and improvement trends
 
-**Tech Stack:** Python, FastAPI, React, ChromaDB, Groq API (Free)
-
 ---
 
 ## Features
 
-### Job Description Analysis 📄
+### Job Description Analysis
 **Multiple input methods:**
-- 📝 **Paste Text** - Copy and paste job descriptions
-- 📄 **Upload File** - Upload PDF or Word documents (.pdf, .docx)
-- 🔗 **Paste URL** - Scrape job postings from websites (JobStreet, LinkedIn, etc.)
+- **Paste Text** - Copy and paste job descriptions
+- **Upload File** - Upload PDF or Word documents (.pdf, .docx)
+- **Paste URL** - Scrape job postings from websites (JobStreet, LinkedIn, etc.)
 
 **AI extracts:**
 - Required skills and technologies
@@ -73,84 +89,6 @@ AI-powered interview preparation tool using RAG and Large Language Models to ana
 
 ---
 
-## Getting Started
-
-### Prerequisites
-
-- Python 3.10 or higher
-- Node.js 18+ and npm
-- Groq API key - [Get FREE key here](https://console.groq.com/) (no credit card required)
-- Git (optional)
-
-### Installation
-
-**1. Clone the repository:**
-```bash
-git clone https://github.com/jimthereal/ai-interview-assistant.git
-cd ai-interview-assistant
-```
-
-**2. Backend Setup:**
-```bash
-# Create conda environment (RECOMMENDED)
-conda create -n ai-interview-assistant python=3.10
-conda activate ai-interview-assistant
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Configure environment
-copy .env.example .env
-# Edit .env and add your Groq API key
-```
-
-**3. Frontend Setup:**
-```bash
-cd frontend
-npm install
-cd ..
-```
-
-### Running the Application
-
-**Quick Start (RECOMMENDED):**
-
-Open TWO terminals:
-
-**Terminal 1 - Backend:**
-```bash
-.\start_backend.bat
-```
-
-**Terminal 2 - Frontend:**
-```bash
-.\start_frontend.bat
-```
-
-**Manual Start (Alternative):**
-
-**Terminal 1 - Backend:**
-```bash
-conda activate ai-interview-assistant
-python -m uvicorn api.main:app --reload
-```
-
-**Terminal 2 - Frontend:**
-```bash
-cd frontend
-npm run dev
-```
-
-### Access the Application
-
-- **Frontend UI:** http://localhost:5173
-- **API Swagger Docs:** http://localhost:8000/docs  
-- **API ReDoc:** http://localhost:8000/redoc
-
-**Important:** Both backend AND frontend must be running!
-
----
-
 ## How to Use
 
 ### 1. Analyze a Job Description
@@ -197,47 +135,6 @@ npm run dev
 ### 4. Learn Technical Terms
 - Use "Term Explainer" for any unfamiliar technical concepts
 - Get clear, beginner-friendly explanations
-
----
-
-## API Documentation
-
-Once the backend is running, view interactive API documentation at:
-
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
-
-### Main Endpoints
-
-**POST /api/analyze-jd**
-- Analyzes job description
-- Returns skills, requirements, and matched questions
-
-**POST /api/generate-answer**
-- Generates AI model answer for a question
-- Takes job context and question as input
-
-**POST /api/evaluate-answer**
-- Evaluates user's answer
-- Returns scores and detailed feedback
-
-**GET /api/questions**
-- Retrieves questions by category or search query
-
-**GET /api/progress**
-- Returns user's practice history and statistics
-
----
-
-## Deployment
-
-Want to host this online? Check out the [DEPLOYMENT.md](DEPLOYMENT.md) guide for:
-- ✅ Free hosting options (Vercel + Render)
-- ✅ Step-by-step deployment instructions
-- ✅ Cost comparisons
-- ✅ Production best practices
-
-**Note**: You do NOT need your PC running 24/7. Deploy to cloud services instead!
 
 ---
 
