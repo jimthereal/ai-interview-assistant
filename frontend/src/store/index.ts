@@ -1,6 +1,14 @@
 import { create } from 'zustand';
 import type { Question, JobDescriptionResponse, EvaluationResponse } from '../types';
 
+interface PracticeHistory {
+  question: Question;
+  userAnswer: string;
+  modelAnswer: string | null;
+  evaluation: EvaluationResponse | null;
+  timestamp: Date;
+}
+
 interface AppState {
   // Job Analysis
   currentJobAnalysis: JobDescriptionResponse | null;
@@ -17,6 +25,11 @@ interface AppState {
   setModelAnswer: (answer: string | null) => void;
   evaluation: EvaluationResponse | null;
   setEvaluation: (evaluation: EvaluationResponse | null) => void;
+
+  // Practice History
+  practiceHistory: PracticeHistory[];
+  addPracticeEntry: (entry: PracticeHistory) => void;
+  clearHistory: () => void;
 
   // UI State
   isLoading: boolean;
@@ -43,6 +56,14 @@ export const useAppStore = create<AppState>((set) => ({
   setModelAnswer: (answer) => set({ modelAnswer: answer }),
   evaluation: null,
   setEvaluation: (evaluation) => set({ evaluation: evaluation }),
+
+  // Practice History
+  practiceHistory: [],
+  addPracticeEntry: (entry) =>
+    set((state) => ({
+      practiceHistory: [...state.practiceHistory, entry],
+    })),
+  clearHistory: () => set({ practiceHistory: [] }),
 
   // UI State
   isLoading: false,

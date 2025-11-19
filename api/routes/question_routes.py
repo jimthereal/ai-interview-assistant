@@ -23,7 +23,7 @@ async def get_questions(
     category: Optional[str] = Query(None, description="Filter by category"),
     difficulty: Optional[str] = Query(None, description="Filter by difficulty"),
     search: Optional[str] = Query(None, description="Semantic search query"),
-    limit: int = Query(10, ge=1, le=50, description="Number of results")
+    limit: int = Query(10, ge=1, le=200, description="Number of results")
 ):
     """
     Retrieve interview questions with optional filtering and semantic search.

@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { explainTerm } from '../api/client';
 import Loading from '../components/Loading';
+import { marked } from 'marked';
 
 export default function Explainer() {
   const [term, setTerm] = useState('');
+  const [submittedTerm, setSubmittedTerm] = useState(''); // Track submitted term
   const [explanation, setExplanation] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -11,6 +13,7 @@ export default function Explainer() {
     if (!term.trim()) return;
 
     setIsLoading(true);
+    setSubmittedTerm(term); // Save the term that was submitted
     try {
       const result = await explainTerm(term);
       setExplanation(result.explanation);
@@ -20,6 +23,11 @@ export default function Explainer() {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Convert markdown to HTML
+  const renderMarkdown = (text: string) => {
+    return { __html: marked(text) };
   };
 
   return (
@@ -57,12 +65,11 @@ export default function Explainer() {
 
       {explanation && !isLoading && (
         <div className="card">
-          <h2 className="text-2xl font-bold mb-4">{term}</h2>
-          <div className="prose prose-invert max-w-none">
-            <p className="text-[var(--text-secondary)] whitespace-pre-wrap leading-relaxed">
-              {explanation}
-            </p>
-          </div>
+          <h2 className="text-2xl font-bold mb-4">{submittedTerm}</h2>
+          <div 
+            className="prose prose-invert max-w-none text-[var(--text-secondary)] leading-relaxed"
+            dangerouslySetInnerHTML={renderMarkdown(explanation)}
+          />
         </div>
       )}
     </div>

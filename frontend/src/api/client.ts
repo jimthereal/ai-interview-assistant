@@ -21,6 +21,23 @@ export const analyzeJobDescription = async (jobDescription: string): Promise<Job
   return response.data;
 };
 
+export const analyzeJobDescriptionFile = async (file: File): Promise<JobDescriptionResponse> => {
+  const formData = new FormData();
+  formData.append('file', file);
+  
+  const response = await axios.post(`${API_BASE_URL}/api/analyze-jd-file`, formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+  return response.data;
+};
+
+export const analyzeJobDescriptionURL = async (url: string): Promise<JobDescriptionResponse> => {
+  const response = await api.post('/api/analyze-jd-url', { url });
+  return response.data;
+};
+
 // Questions
 export const getQuestions = async (params?: {
   category?: string;

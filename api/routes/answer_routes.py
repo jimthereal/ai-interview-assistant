@@ -58,7 +58,7 @@ async def evaluate_answer(request: EvaluateAnswerRequest):
             user_answer=request.user_answer,
             category=request.category,
             difficulty=request.difficulty,
-            model_answer=request.model_answer
+            ideal_answer=request.model_answer
         )
         
         # Extract scores

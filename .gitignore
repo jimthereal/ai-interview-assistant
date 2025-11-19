@@ -52,3 +52,14 @@ data/chroma_db/
 # OS
 .DS_Store
 Thumbs.db
+
+# Test files (optional - keep if you want to track tests)
+# sample_job_description.pdf
+
+# Root node_modules (backend package.json)
+/node_modules/
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db

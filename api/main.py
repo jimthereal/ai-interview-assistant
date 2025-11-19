@@ -7,7 +7,7 @@ from api.routes import jd_routes, question_routes, answer_routes, progress_route
 
 app = FastAPI(
     title="AI Interview Assistant API",
-    description="Backend API for AI-powered interview preparation",
+    description="Backend API for AI-powered interview assistant",
     version="1.0.0"
 )
 

@@ -45,7 +45,7 @@ export default function Home() {
         <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
           <span className="text-gradient">AI-Powered</span>
           <br />
-          <span className="text-[var(--text-primary)]">Interview Preparation</span>
+          <span className="text-[var(--text-primary)]">Interview Assistant</span>
         </h1>
         <p className="text-xl text-[var(--text-secondary)] max-w-3xl mx-auto">
           Master technical interviews with personalized practice questions, AI-generated answers, 

@@ -1,6 +1,6 @@
 # AI Interview Assistant
 
-An intelligent interview preparation tool powered by RAG (Retrieval-Augmented Generation) and Large Language Models.
+An intelligent interview assistant powered by RAG (Retrieval-Augmented Generation) and Large Language Models.
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Groq](https://img.shields.io/badge/Groq-Llama_3.3-green.svg)](https://groq.com/)
@@ -17,6 +17,7 @@ An intelligent interview preparation tool powered by RAG (Retrieval-Augmented Ge
 - [Getting Started](#getting-started)
 - [How to Use](#how-to-use)
 - [API Documentation](#api-documentation)
+- [Deployment](#deployment)
 
 ---
 
@@ -37,8 +38,13 @@ AI Interview Assistant helps you prepare for technical interviews by analyzing j
 
 ## Features
 
-### Job Description Analysis
-Upload or paste a job description, and the AI will extract:
+### Job Description Analysis 📄
+**Multiple input methods:**
+- 📝 **Paste Text** - Copy and paste job descriptions
+- 📄 **Upload File** - Upload PDF or Word documents (.pdf, .docx)
+- 🔗 **Paste URL** - Scrape job postings from websites (JobStreet, LinkedIn, etc.)
+
+**AI extracts:**
 - Required skills and technologies
 - Experience level expectations
 - Key focus areas for interview preparation
@@ -85,8 +91,6 @@ Upload or paste a job description, and the AI will extract:
 - FastAPI provides automatic API documentation and type safety
 - React offers responsive, interactive user experience
 - Excellent portfolio demonstration of full-stack capabilities
-
-**Total Cost: $0/month**
 
 ---
 
@@ -171,11 +175,31 @@ npm run dev
 ## How to Use
 
 ### 1. Analyze a Job Description
+
+**Three ways to input job descriptions:**
+
+**Option A: Paste Text**
 - Navigate to "Job Analysis" page
-- Paste a job description from any job posting
+- Click "📝 Paste Text" tab
+- Paste job description
 - Click "Analyze"
+
+**Option B: Upload File (NEW!)**
+- Navigate to "Job Analysis" page
+- Click "📄 Upload File" tab
+- Upload PDF or Word document
+- Click "Analyze"
+
+**Option C: Paste URL (NEW!)**
+- Navigate to "Job Analysis" page
+- Click "🔗 Paste URL" tab
+- Paste job posting URL (e.g., from JobStreet, LinkedIn)
+- Click "Analyze"
+
+**Results:**
 - Review extracted skills and requirements
 - View matched interview questions
+- Click any question to start practicing
 
 ### 2. Practice Interview Questions
 - Go to "Practice" page
@@ -226,58 +250,15 @@ Once the backend is running, view interactive API documentation at:
 
 ---
 
-## Development
+## Deployment
 
-### Project Structure
-```
-ai-interview-assistant/
-├── api/                    # FastAPI backend
-│   ├── main.py            # API entry point
-│   ├── routes/            # API endpoints
-│   └── models/            # Pydantic models
-├── src/                   # Core business logic
-│   ├── vector_store.py    # ChromaDB operations
-│   ├── llm_service.py     # Groq API integration
-│   ├── jd_analyzer.py     # Job description analysis
-│   └── answer_evaluator.py # Answer evaluation
-├── frontend/              # React application
-│   ├── src/
-│   │   ├── components/   # React components
-│   │   ├── pages/        # Page components
-│   │   └── api/          # API client
-│   └── package.json
-├── data/
-│   ├── interview_questions.json  # Question database
-│   └── chroma_db/                # Vector database
-├── config/
-│   └── config.py          # Configuration
-├── requirements.txt       # Python dependencies
-└── .env.example          # Environment template
-```
+Want to host this online? Check out the [DEPLOYMENT.md](DEPLOYMENT.md) guide for:
+- ✅ Free hosting options (Vercel + Render)
+- ✅ Step-by-step deployment instructions
+- ✅ Cost comparisons
+- ✅ Production best practices
 
-### Running Tests
-```bash
-# Backend tests
-pytest
-
-# Frontend tests
-cd frontend
-npm test
-```
-
----
-
-## License
-
-This project is open source and available for personal and educational use.
-
----
-
-## Contact
-
-**Project Repository**: [https://github.com/yourusername/ai-interview-assistant](https://github.com/yourusername/ai-interview-assistant)
-
-For questions or suggestions, please open an issue on GitHub.
+**Note**: You do NOT need your PC running 24/7. Deploy to cloud services instead!
 
 ---
 
