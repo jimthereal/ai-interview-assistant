@@ -118,28 +118,6 @@ This project is production-ready and deployed on:
 - **Frontend:** Vercel (Global CDN)
 - **Backend:** Render (Cloud containers)
 
-### Environment Variables
-
-**Backend (Render):**
-```bash
-GROQ_API_KEY=your_groq_api_key
-USE_EMBEDDINGS=false          # Production mode
-PYTHON_VERSION=3.10.0
-```
-
-**Frontend (Vercel):**
-```bash
-VITE_API_URL=https://your-backend.onrender.com
-```
-
-## 📊 Statistics
-
-- **150+ Questions** across 11 categories
-- **3 Input Methods** for job descriptions
-- **4 Main Features** (Analysis, Practice, Progress, Explainer)
-- **~5000+ Lines** of production code
-- **100% FREE** - No API costs (Groq free tier)
-
 ## 🤝 Contributing
 
 This is a personal project, but suggestions and feedback are welcome! Feel free to open issues or submit pull requests.
