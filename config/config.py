@@ -21,6 +21,7 @@ class Config:
     # Vector Database
     BASE_DIR = Path(__file__).resolve().parent.parent
     CHROMA_PERSIST_DIR = os.getenv("CHROMA_PERSIST_DIR", str(BASE_DIR / "data" / "chroma_db"))
+    USE_EMBEDDINGS = os.getenv("USE_EMBEDDINGS", "false").lower() == "true"  # Disable for low memory
     
     # Application Settings
     MAX_QUESTIONS_PER_SESSION = int(os.getenv("MAX_QUESTIONS_PER_SESSION", "10"))
