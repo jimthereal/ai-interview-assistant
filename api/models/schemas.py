@@ -1,7 +1,7 @@
 """
 Pydantic models for API request/response validation
 """
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Optional, Dict, Any
 from datetime import datetime
 
@@ -60,6 +60,8 @@ class GenerateAnswerResponse(BaseModel):
 
 
 class EvaluateAnswerRequest(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())  # Allow model_* fields
+    
     question: str
     user_answer: str
     category: str

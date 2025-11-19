@@ -15,21 +15,24 @@ class VectorStore:
     
     def __init__(self):
         """
-        Initialize vector store with ChromaDB using local embeddings
+        Initialize vector store - lightweight mode for production
         """
-        # Initialize ChromaDB client
+        # Skip ChromaDB initialization if embeddings disabled (production mode)
+        if not Config.USE_EMBEDDINGS:
+            print("Production mode: Keyword-based search (no ChromaDB)")
+            self.client = None
+            self.embedding_model = None
+            self.collection = None
+            return
+        
+        # Initialize ChromaDB client for local development
         self.client = chromadb.PersistentClient(
             path=Config.CHROMA_PERSIST_DIR,
             settings=Settings(anonymized_telemetry=False)
         )
         
-        # Initialize local embedding model only if embeddings are enabled
-        if Config.USE_EMBEDDINGS:
-            print("Using local embeddings (sentence-transformers)")
-            self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
-        else:
-            print("Embeddings disabled - using keyword-based search for production")
-            self.embedding_model = None
+        print("Development mode: Using embeddings (sentence-transformers)")
+        self.embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
         
         # Get or create collection
         self.collection = self.client.get_or_create_collection(
@@ -48,15 +51,12 @@ class VectorStore:
     def add_questions(self, questions: List[Dict]):
         """
         Add interview questions to vector store
-        
-        Args:
-            questions: List of question dictionaries with fields:
-                - question: The question text
-                - category: Question category
-                - difficulty: Easy/Medium/Hard
-                - answer_hints: Optional hints for answering
-                - keywords: List of relevant keywords
         """
+        # Skip if in production mode
+        if not Config.USE_EMBEDDINGS:
+            print("Production mode: Skipping vector store population")
+            return
+        
         documents = []
         metadatas = []
         ids = []
@@ -138,7 +138,12 @@ class VectorStore:
         return questions
     
     def load_questions_from_file(self, file_path: Path):
-        """Load questions from JSON file and add to vector store"""
+        """Load questions from JSON file"""
+        # Skip if in production mode
+        if not Config.USE_EMBEDDINGS:
+            print("Production mode: Skipping vector store loading")
+            return
+        
         with open(file_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
             questions = data.get("questions", [])
@@ -146,6 +151,10 @@ class VectorStore:
     
     def clear_database(self):
         """Clear all data from the collection"""
+        # Skip if in production mode
+        if not Config.USE_EMBEDDINGS or not self.client:
+            return
+        
         self.client.delete_collection("interview_questions")
         self.collection = self.client.get_or_create_collection(
             name="interview_questions",
@@ -223,6 +232,22 @@ class VectorStore:
     
     def get_stats(self) -> Dict:
         """Get statistics about the vector store"""
+        if not Config.USE_EMBEDDINGS or not self.collection:
+            # Return stats from JSON file in production
+            questions_file = Config.BASE_DIR / "data" / "interview_questions.json"
+            try:
+                with open(questions_file, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    return {
+                        "total_questions": len(data.get('questions', [])),
+                        "embedding_model": "keyword-based (production)"
+                    }
+            except:
+                return {
+                    "total_questions": 0,
+                    "embedding_model": "keyword-based (production)"
+                }
+        
         count = self.collection.count()
         return {
             "total_questions": count,
