@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useExplainerStore } from '../store/explainerStore';
 import { explainTerm } from '../api/client';
 import Loading from '../components/Loading';
@@ -13,6 +14,15 @@ export default function Explainer() {
     setIsLoading,
     setError
   } = useExplainerStore();
+
+  // Clear results when navigating away
+  useEffect(() => {
+    return () => {
+      setResult(null);
+      setError(null);
+      setTerm('');
+    };
+  }, [setResult, setError, setTerm]);
 
   const handleExplain = async () => {
     if (!term.trim()) return;
