@@ -22,7 +22,8 @@ export default function Explainer() {
       setError(null);
       setTerm('');
     };
-  }, [setResult, setError, setTerm]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleExplain = async () => {
     if (!term.trim()) return;
