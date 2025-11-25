@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { getQuestions, getCategories, generateAnswer, evaluateAnswer } from '../api/client';
 import Loading from '../components/Loading';
 import ScoreRing from '../components/ScoreRing';
-import type { Question, EvaluationResponse } from '../types';
+import type { Question, EvaluationResponse, ModelAnswer } from '../types';
 
 export default function Practice() {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -10,7 +10,7 @@ export default function Practice() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
-  const [modelAnswer, setModelAnswer] = useState('');
+  const [modelAnswer, setModelAnswer] = useState<ModelAnswer | null>(null);
   const [evaluation, setEvaluation] = useState<EvaluationResponse | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [loadingState, setLoadingState] = useState<'questions' | 'answer' | 'evaluation' | null>(null);
@@ -57,7 +57,7 @@ export default function Practice() {
 
   const resetAnswers = () => {
     setUserAnswer('');
-    setModelAnswer('');
+    setModelAnswer(null);
     setEvaluation(null);
   };
 
@@ -107,7 +107,7 @@ export default function Practice() {
         user_answer: userAnswer,
         category: currentQuestion.category,
         difficulty: currentQuestion.difficulty,
-        model_answer: modelAnswer || undefined,
+        model_answer: modelAnswer?.detailed_answer || undefined,
       });
       setEvaluation(result);
     } catch (error) {
@@ -164,7 +164,7 @@ export default function Practice() {
                 <span className="badge-warning">{currentQuestion.difficulty}</span>
               </div>
             </div>
-            
+
             {currentQuestion.hints && currentQuestion.hints.length > 0 && (
               <div className="mt-4 p-4 bg-[var(--bg-tertiary)] rounded-lg">
                 <p className="text-sm font-medium mb-2">Hints:</p>
@@ -207,11 +207,52 @@ export default function Practice() {
 
           {/* Model Answer */}
           {modelAnswer && (
-            <div className="card bg-[var(--bg-elevated)]">
-              <h3 className="text-lg font-semibold mb-4">AI Model Answer</h3>
-              <div className="prose prose-invert max-w-none">
-                <p className="text-[var(--text-secondary)] whitespace-pre-wrap">{modelAnswer}</p>
+            <div className="space-y-6 animate-fade-in">
+              {/* Summary */}
+              <div className="card border-l-4 border-blue-500">
+                <h3 className="text-sm font-bold text-blue-400 uppercase tracking-wider mb-2">Summary</h3>
+                <p className="text-lg font-medium leading-relaxed">{modelAnswer.summary}</p>
               </div>
+
+              {/* Key Points */}
+              <div className="card">
+                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <span className="text-yellow-400">🔑</span> Key Points
+                </h3>
+                <ul className="space-y-3">
+                  {modelAnswer.key_points.map((point, index) => (
+                    <li key={index} className="flex items-start gap-3 text-[var(--text-secondary)]">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-[var(--text-primary)] shrink-0" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Detailed Answer */}
+              <div className="card">
+                <h3 className="text-lg font-bold mb-4">📝 Detailed Answer</h3>
+                <div className="prose prose-invert max-w-none text-[var(--text-secondary)] whitespace-pre-wrap leading-relaxed">
+                  {modelAnswer.detailed_answer}
+                </div>
+              </div>
+
+              {/* Examples */}
+              {modelAnswer.examples && modelAnswer.examples.length > 0 && (
+                <div className="card bg-[var(--bg-secondary)]">
+                  <h3 className="text-lg font-bold mb-3 flex items-center gap-2">
+                    <span className="text-cyan-400">💡</span> Examples
+                  </h3>
+                  <ul className="space-y-2">
+                    {modelAnswer.examples.map((example, index) => (
+                      <li key={index} className="flex items-start gap-2 text-sm font-mono text-[var(--text-secondary)]">
+                        <span className="text-cyan-400 mt-1">›</span>
+                        {example}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           )}
 
@@ -219,7 +260,7 @@ export default function Practice() {
           {evaluation && (
             <div className="card">
               <h3 className="text-2xl font-bold mb-6">Evaluation Results</h3>
-              
+
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Score Ring */}
                 <div className="flex justify-center">
