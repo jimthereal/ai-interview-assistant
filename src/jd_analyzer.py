@@ -275,7 +275,7 @@ Be specific and extract actual skills/technologies mentioned."""
         
         return list(set(categories))
     
-    def explain_term(self, term: str, context: str = None) -> str:
+    def explain_term(self, term: str, context: str = None) -> Dict:
         """
         Explain a technical term in simple language
         
@@ -284,7 +284,7 @@ Be specific and extract actual skills/technologies mentioned."""
             context: Optional context for more specific explanation
             
         Returns:
-            String explanation of the term
+            Dictionary explanation of the term
         """
         # Use the LLMService's explain_term method
         return self.llm_service.explain_term(term, context)

@@ -24,7 +24,7 @@ export const analyzeJobDescription = async (jobDescription: string): Promise<Job
 export const analyzeJobDescriptionFile = async (file: File): Promise<JobDescriptionResponse> => {
   const formData = new FormData();
   formData.append('file', file);
-  
+
   const response = await axios.post(`${API_BASE_URL}/api/analyze-jd-file`, formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
@@ -84,11 +84,15 @@ export const getProgress = async (): Promise<ProgressResponse> => {
 };
 
 // Term Explainer
-export const explainTerm = async (term: string, context?: string): Promise<{
-  term: string;
-  explanation: string;
-  examples: string[];
-}> => {
+export interface ExplanationResult {
+  definition: string;
+  analogy: string;
+  key_points: string[];
+  example: string;
+  why_it_matters: string;
+}
+
+export const explainTerm = async (term: string, context?: string): Promise<ExplanationResult> => {
   const response = await api.post('/api/explain-term', null, {
     params: { term, context },
   });

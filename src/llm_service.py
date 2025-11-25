@@ -111,7 +111,7 @@ Answer:"""
         
         return response
     
-    def explain_term(self, term: str, context: Optional[str] = None) -> str:
+    def explain_term(self, term: str, context: Optional[str] = None) -> Dict:
         """
         Explain a technical term in simple language
         
@@ -120,29 +120,46 @@ Answer:"""
             context: Additional context
             
         Returns:
-            Simple explanation
+            Dictionary with structured explanation
         """
         prompt = f"""Explain the technical term "{term}" in simple, clear language that a beginner can understand.
 
 {f"Context: {context}" if context else ""}
 
-Provide:
-1. A simple definition (1-2 sentences)
-2. Why it matters
-3. A real-world example or analogy
-4. Common use cases
+Provide the output in strict JSON format with the following keys:
+{{
+    "definition": "A simple 1-2 sentence definition",
+    "analogy": "A real-world analogy to help understand the concept",
+    "key_points": ["Key point 1", "Key point 2", "Key point 3"],
+    "example": "A concrete technical example or use case",
+    "why_it_matters": "Why this concept is important"
+}}
 
-Keep it concise and accessible."""
+Ensure the JSON is valid and the content is beginner-friendly."""
 
         response = self._call_llm(
             messages=[
-                {"role": "system", "content": "You are a patient teacher who excels at explaining complex technical concepts in simple terms."},
+                {"role": "system", "content": "You are a patient teacher who excels at explaining complex technical concepts in simple terms. You always respond with valid JSON."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=300
+            max_tokens=500
         )
         
-        return response
+        # Parse JSON response
+        import json
+        try:
+            # Clean up potential markdown code blocks
+            clean_response = response.replace("```json", "").replace("```", "").strip()
+            return json.loads(clean_response)
+        except json.JSONDecodeError:
+            # Fallback for plain text response
+            return {
+                "definition": response,
+                "analogy": "Not available",
+                "key_points": [],
+                "example": "Not available",
+                "why_it_matters": "Not available"
+            }
     
     def evaluate_answer(
         self,

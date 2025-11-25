@@ -160,11 +160,7 @@ async def explain_term(term: str, context: str = None):
     """
     try:
         explanation = jd_analyzer.explain_term(term, context)
-        return {
-            "term": term,
-            "explanation": explanation,
-            "examples": []
-        }
+        return explanation
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Explanation failed: {str(e)}")
