@@ -15,6 +15,12 @@ AI-powered interview assistant that analyzes job descriptions and provides perso
 
 **🚀 Live Demo:** [https://ai-interview-assistant-xi-smoky.vercel.app](https://ai-interview-assistant-xi-smoky.vercel.app)
 
+## 🎥 Demo Video
+
+![App Demo](app_demo_walkthrough_1764088846020.webp)
+
+*Watch the AI Interview Assistant in action!*
+
 ## ✨ Features
 
 ### 📄 **Multi-Source Job Description Analysis**

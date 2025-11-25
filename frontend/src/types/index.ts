@@ -59,3 +59,15 @@ export interface ProgressResponse {
   stats: ProgressStats;
   improvement_suggestions: string[];
 }
+
+export interface ModelAnswer {
+  summary: string;
+  key_points: string[];
+  detailed_answer: string;
+  examples: string[];
+}
+
+export interface GenerateAnswerResponse {
+  answer: ModelAnswer;
+  formatted: boolean;
+}

@@ -4,6 +4,7 @@ import type {
   Question,
   EvaluationResponse,
   ProgressResponse,
+  GenerateAnswerResponse,
 } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -61,7 +62,7 @@ export const generateAnswer = async (data: {
   difficulty: string;
   job_context?: string;
   hints?: string[];
-}): Promise<{ answer: string; formatted: boolean }> => {
+}): Promise<GenerateAnswerResponse> => {
   const response = await api.post('/api/generate-answer', data);
   return response.data;
 };

@@ -54,8 +54,15 @@ class GenerateAnswerRequest(BaseModel):
     hints: Optional[List[str]] = []
 
 
+class ModelAnswer(BaseModel):
+    summary: str
+    key_points: List[str]
+    detailed_answer: str
+    examples: List[str]
+
+
 class GenerateAnswerResponse(BaseModel):
-    answer: str
+    answer: ModelAnswer
     formatted: bool
 
 

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { marked } from 'marked';
 import { useNavigate } from 'react-router-dom';
 import { analyzeJobDescription, analyzeJobDescriptionFile, analyzeJobDescriptionURL } from '../api/client';
 import { useAppStore } from '../store';
@@ -111,11 +112,10 @@ export default function JobAnalysis() {
               setInputMode('text');
               setError('');
             }}
-            className={`px-4 py-2 font-medium transition-colors relative ${
-              inputMode === 'text'
-                ? 'text-[var(--primary)] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--primary)]'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-            }`}
+            className={`px-4 py-2 font-medium transition-colors relative ${inputMode === 'text'
+              ? 'text-[var(--primary)] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--primary)]'
+              : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
           >
             📝 Paste Text
           </button>
@@ -124,11 +124,10 @@ export default function JobAnalysis() {
               setInputMode('file');
               setError('');
             }}
-            className={`px-4 py-2 font-medium transition-colors relative ${
-              inputMode === 'file'
-                ? 'text-[var(--primary)] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--primary)]'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-            }`}
+            className={`px-4 py-2 font-medium transition-colors relative ${inputMode === 'file'
+              ? 'text-[var(--primary)] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--primary)]'
+              : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
           >
             📄 Upload File
           </button>
@@ -137,11 +136,10 @@ export default function JobAnalysis() {
               setInputMode('url');
               setError('');
             }}
-            className={`px-4 py-2 font-medium transition-colors relative ${
-              inputMode === 'url'
-                ? 'text-[var(--primary)] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--primary)]'
-                : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-            }`}
+            className={`px-4 py-2 font-medium transition-colors relative ${inputMode === 'url'
+              ? 'text-[var(--primary)] after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-[var(--primary)]'
+              : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+              }`}
           >
             🔗 Paste URL
           </button>
@@ -271,7 +269,10 @@ export default function JobAnalysis() {
           {/* Summary */}
           <div className="card">
             <h2 className="text-2xl font-bold mb-4">Analysis Summary</h2>
-            <p className="text-[var(--text-secondary)]">{analysis.summary}</p>
+            <div
+              className="text-[var(--text-secondary)] prose prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: marked(analysis.summary) }}
+            />
           </div>
 
           {/* Key Details */}

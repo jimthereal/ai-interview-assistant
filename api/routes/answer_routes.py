@@ -38,7 +38,7 @@ async def generate_answer(request: GenerateAnswerRequest):
         )
         
         return GenerateAnswerResponse(
-            answer=answer,
+            answer=answer,  # This will now be a dict
             formatted=use_star
         )
     

@@ -39,7 +39,7 @@ class LLMService:
         user_experience: Optional[str] = None,
         answer_hints: Optional[str] = None,
         use_star_method: bool = False
-    ) -> str:
+    ) -> Dict:
         """
         Generate a personalized answer to an interview question
         
@@ -51,7 +51,7 @@ class LLMService:
             use_star_method: Use STAR method for behavioral questions
             
         Returns:
-            Generated answer
+            Dictionary with structured answer
         """
         # Build context
         context_parts = []
@@ -68,48 +68,50 @@ class LLMService:
         context = "\n".join(context_parts) if context_parts else "No specific context provided."
         
         # Build prompt
-        if use_star_method:
-            prompt = f"""You are an expert interview coach. Generate a strong answer to this behavioral interview question using the STAR method (Situation, Task, Action, Result).
+        prompt = f"""You are an expert interview coach. Generate a strong, professional answer to this interview question.
 
 Interview Question: {question}
 
 {context}
 
-Provide a compelling answer that:
-1. Follows the STAR framework
-2. Is specific and detailed
-3. Demonstrates relevant skills and achievements
-4. Is concise (2-3 minutes when spoken)
-5. Sounds natural and conversational
+Provide the output in strict JSON format with the following keys:
+{{
+    "summary": "A 1-2 sentence high-level summary of the answer",
+    "key_points": ["Key point 1", "Key point 2", "Key point 3"],
+    "detailed_answer": "The full, conversational answer text (2-3 paragraphs)",
+    "examples": ["Specific example 1", "Specific example 2"]
+}}
 
-Answer:"""
-        else:
-            prompt = f"""You are an expert interview coach. Generate a strong, professional answer to this technical interview question.
-
-Interview Question: {question}
-
-{context}
-
-Provide a clear, comprehensive answer that:
-1. Directly addresses the question
-2. Demonstrates deep understanding
-3. Includes relevant examples or use cases
-4. Is well-structured and easy to follow
-5. Shows enthusiasm and expertise
-6. Is concise but complete (2-3 minutes when spoken)
-
-Answer:"""
+Ensure the answer is:
+1. {'Structured using STAR method (Situation, Task, Action, Result)' if use_star_method else 'Direct and comprehensive'}
+2. Specific and detailed
+3. Demonstrates relevant skills
+4. Sounds natural and conversational
+"""
         
         # Generate answer
         response = self._call_llm(
             messages=[
-                {"role": "system", "content": "You are an expert interview coach helping candidates prepare for technical interviews."},
+                {"role": "system", "content": "You are an expert interview coach. You always respond with valid JSON."},
                 {"role": "user", "content": prompt}
             ],
             max_tokens=Config.ANSWER_MAX_TOKENS
         )
         
-        return response
+        # Parse JSON response
+        import json
+        try:
+            # Clean up potential markdown code blocks
+            clean_response = response.replace("```json", "").replace("```", "").strip()
+            return json.loads(clean_response)
+        except json.JSONDecodeError:
+            # Fallback for plain text response
+            return {
+                "summary": "Generated Answer",
+                "key_points": [],
+                "detailed_answer": response,
+                "examples": []
+            }
     
     def explain_term(self, term: str, context: Optional[str] = None) -> Dict:
         """

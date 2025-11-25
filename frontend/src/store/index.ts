@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import type { Question, JobDescriptionResponse, EvaluationResponse } from '../types';
+import type { Question, JobDescriptionResponse, EvaluationResponse, ModelAnswer } from '../types';
 
 interface PracticeHistory {
   question: Question;
   userAnswer: string;
-  modelAnswer: string | null;
+  modelAnswer: ModelAnswer | null;
   evaluation: EvaluationResponse | null;
   timestamp: Date;
 }
@@ -21,8 +21,8 @@ interface AppState {
   // Current Answer & Evaluation
   currentAnswer: string;
   setCurrentAnswer: (answer: string) => void;
-  modelAnswer: string | null;
-  setModelAnswer: (answer: string | null) => void;
+  modelAnswer: ModelAnswer | null;
+  setModelAnswer: (answer: ModelAnswer | null) => void;
   evaluation: EvaluationResponse | null;
   setEvaluation: (evaluation: EvaluationResponse | null) => void;
 
@@ -34,7 +34,7 @@ interface AppState {
   // UI State
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
-  
+
   // Reset functions
   resetQuestion: () => void;
   resetAll: () => void;
@@ -77,7 +77,7 @@ export const useAppStore = create<AppState>((set) => ({
       modelAnswer: null,
       evaluation: null,
     }),
-  
+
   resetAll: () =>
     set({
       currentJobAnalysis: null,
