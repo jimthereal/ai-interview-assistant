@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useAppStore } from '../store';
 import Loading from '../components/Loading';
 import ScoreRing from '../components/ScoreRing';
@@ -23,9 +24,9 @@ export default function Progress() {
         <p className="text-[var(--text-secondary)] mb-8">
           Start practicing to see your progress here
         </p>
-        <a href="/practice" className="btn-primary inline-block">
+        <Link to="/practice" className="btn-primary inline-block">
           Start Practicing
-        </a>
+        </Link>
       </div>
     );
   }
