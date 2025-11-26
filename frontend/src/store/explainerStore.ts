@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 
 export interface ExplanationResult {
     definition: string;
@@ -20,20 +19,13 @@ interface ExplainerState {
     setError: (error: string | null) => void;
 }
 
-export const useExplainerStore = create<ExplainerState>()(
-    persist(
-        (set) => ({
-            term: '',
-            result: null,
-            isLoading: false,
-            error: null,
-            setTerm: (term) => set({ term }),
-            setResult: (result) => set({ result }),
-            setIsLoading: (isLoading) => set({ isLoading }),
-            setError: (error) => set({ error }),
-        }),
-        {
-            name: 'explainer-storage',
-        }
-    )
-);
+export const useExplainerStore = create<ExplainerState>()((set) => ({
+    term: '',
+    result: null,
+    isLoading: false,
+    error: null,
+    setTerm: (term) => set({ term }),
+    setResult: (result) => set({ result }),
+    setIsLoading: (isLoading) => set({ isLoading }),
+    setError: (error) => set({ error }),
+}));
